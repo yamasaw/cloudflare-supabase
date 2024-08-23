@@ -12,10 +12,6 @@ const app = new Hono<{Bindings: Bindings}>()
 
 
 app.get('/', async (c) => {
-  const supabaseUrl = c.env.SUPABASE_URL
-  const supabaseKey = c.env.SUPABASE_KEY
-  const supabase = createClient(supabaseUrl, supabaseKey)
-  const { data, error } = await supabase.from('sample').select('*')
   return c.json({ message: 'Hello World' })
 })
 
