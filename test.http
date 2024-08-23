@@ -1,0 +1,28 @@
+### Home
+GET http://localhost:8787/
+
+
+### User ログイン
+POST http://localhost:8787/login/
+Content-Type: application/json
+
+{
+    "email": "signup@example.com",
+    "password": "password"
+}
+
+### User ログアウト
+POST http://localhost:8787/logout/
+Content-Type: application/json
+
+### User サインアップ
+POST http://localhost:8787/signup/
+Content-Type: application/json
+
+{
+    "email": "signup@example.com",
+    "password": "password"
+}
+
+### User 一覧取得
+GET http://localhost:8787/user/
