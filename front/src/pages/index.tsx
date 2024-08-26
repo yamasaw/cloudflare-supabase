@@ -2,13 +2,20 @@ import React, { useState } from "react";
 
 const API_URL = "http://127.0.0.1:8787";
 
-const callAPI = (path: string, method: string='GET',body: any={}) => {
-  return fetch(API_URL + path, {
+const callAPI = async (path: string, method: string='GET',data: string='{}') => {
+  let body: string|undefined = undefined
+  if (method === 'GET') {
+  } else {
+    body = data
+  }
+
+  return await fetch(API_URL + path, {
     method,
     headers: {
       "Content-Type": "application/json",
     },
     mode: 'cors',
+    body,
   }).catch((e) => {
     console.error('api error', e);
   });
@@ -18,12 +25,13 @@ const callAPI = (path: string, method: string='GET',body: any={}) => {
 export default function Home() {
   const [path, setPath ] = useState('/login/');
   const [method, setMethod ] = useState('GET');
-  const [body, setBody ] = useState('{}');
+  const [body, setBody ] = useState('{\n"email": "signup@example.com",\n"password": "password"\n}');
+  const [response, setResponse ] = useState<any>();
 
-  const clickApiButton = () => {
-    callAPI(path, method, body).then((res) => {
-      console.log(res);
-    });
+  const clickApiButton = async () => {
+    const res = await callAPI(path, method, body).then(async (res) => {
+      setResponse(await res.json());
+    })
   };
 
   return (
@@ -56,6 +64,10 @@ export default function Home() {
               onClick={clickApiButton}
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >call api</button>
+          </div>
+          <div className="mt-4">
+            <p>Response:</p>
+            <textarea className="p-1.5 w-80 h-48 border border-gray-500 rounded-sm" value={JSON.stringify(response)} />
           </div>
         </div>
       </div>
