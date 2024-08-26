@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const API_URL = "http://127.0.0.1:54321";
+const API_URL = "http://127.0.0.1:8787";
 
 const callAPI = (path: string, method: string='GET',body: any={}) => {
   return fetch(API_URL + path, {
@@ -8,7 +8,7 @@ const callAPI = (path: string, method: string='GET',body: any={}) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body,
+    mode: 'cors',
   }).catch((e) => {
     console.error('api error', e);
   });
