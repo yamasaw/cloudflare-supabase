@@ -1,4 +1,5 @@
 import { Hono } from 'hono'
+import { User } from '../types/users'
 import { ClientErrorStatusCode } from 'hono/utils/http-status'
 import { createClient } from '@supabase/supabase-js'
 
@@ -56,7 +57,7 @@ app.post('/signup/', async(c) => {
 app.get('/users/', async (c) => {
   const supabaseUrl = c.env.SUPABASE_URL
   const supabaseKey = c.env.SUPABASE_KEY
-  const supabase = createClient(supabaseUrl, supabaseKey)
+  const supabase = createClient<Array<User>>(supabaseUrl, supabaseKey)
   const { data, error } = await supabase.from('users').select('*')
 
   return c.json(data)
@@ -66,7 +67,7 @@ app.get('/users/', async (c) => {
 app.get('/users/:id', async (c) => {
   const supabaseUrl = c.env.SUPABASE_URL
   const supabaseKey = c.env.SUPABASE_KEY
-  const supabase = createClient(supabaseUrl, supabaseKey)
+  const supabase = createClient<User>(supabaseUrl, supabaseKey)
   const { data, error } = await supabase.from('users').select('*')
   return c.json(data)
 })
