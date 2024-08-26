@@ -30,7 +30,7 @@ app.post('/login/', async(c) => {
   if (error) {
     return c.json({ message: error.message }, error.status as ClientErrorStatusCode)
   }
-  return c.json(data)
+  return c.json(data.session)
 })
 
 app.post('/logout/', async(c) => {

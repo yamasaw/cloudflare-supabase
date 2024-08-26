@@ -67,7 +67,7 @@ export default function Home() {
           </div>
           <div className="mt-4">
             <p>Response:</p>
-            <textarea className="p-1.5 w-80 h-48 border border-gray-500 rounded-sm" value={JSON.stringify(response)} />
+            <textarea className="p-1.5 w-[1024px] h-96 border border-gray-500 rounded-sm" value={JSON.stringify(response)} />
           </div>
         </div>
       </div>
