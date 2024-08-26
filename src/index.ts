@@ -1,4 +1,5 @@
 import { Hono } from 'hono'
+import { cors } from 'hono/cors'
 import { User } from '../types/users'
 import { ClientErrorStatusCode } from 'hono/utils/http-status'
 import { createClient } from '@supabase/supabase-js'
@@ -11,6 +12,10 @@ type Bindings = {
 }
 const app = new Hono<{Bindings: Bindings}>()
 
+
+app.use('*', cors({
+  origin: ['http://localhost:3000'],
+}))
 
 app.get('/', async (c) => {
   return c.json({ message: 'Hello World' })
